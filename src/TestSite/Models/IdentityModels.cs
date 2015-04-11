@@ -16,6 +16,8 @@ namespace TestSite.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         private static bool _created = false;
+
+        public DbSet<Product> Products { get; set; }
         
         public ApplicationDbContext()
         {            

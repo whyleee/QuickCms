@@ -12,6 +12,8 @@ using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
+using QuickCms;
+using QuickCms.EntityFramework;
 using TestSite.Models;
 
 namespace TestSite
@@ -47,6 +49,7 @@ namespace TestSite
             // You need to add Microsoft.AspNet.Mvc.WebApiCompatShim package to project.json
             // services.AddWebApiConventions();
 
+            services.AddInstance<ITypeDefinitionProvider>(new EfTypeDefinitionProvider(typeof (ApplicationDbContext)));
         }
 
         // Configure is called after ConfigureServices is called.

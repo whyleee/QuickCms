@@ -1,0 +1,20 @@
+﻿@model TestSite.Models.AdminIndexViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QuickCms Admin</title>
+</head>
+<body>
+<h1>Found types:</h1>
+<ul>
+    @foreach (var type in Model.FoundTypes)
+    {
+        <li>@type.Name</li>
+    }
+</ul>
+</body>
+</html>

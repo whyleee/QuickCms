@@ -1,16 +1,14 @@
 ﻿{
-    "version": "1.0.0-*",
+    "version": "0.0.1",
     "dependencies": {
     },
 
-    "frameworks" : {
-        "aspnet50" : { 
+    "frameworks": {
+        "aspnetcore50": {
             "dependencies": {
-            }
-        },
-        "aspnetcore50" : { 
-            "dependencies": {
-                "System.Runtime": "4.0.20-beta-22523"
+                "EntityFramework.SqlServer": "7.0.0-beta3",
+                "System.Runtime": "4.0.20-beta-22523",
+                "System.Linq": "4.0.0-beta-22605"
             }
         }
     }
