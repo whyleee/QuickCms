@@ -7,4 +7,10 @@ namespace TestSite.Models
     {
         public IList<Type> FoundTypes { get; set; }
     }
+
+    public class EntityIndexViewModel
+    {
+        public string EntityName { get; set; }
+        public IList<object> Entities { get; set; }
+    }
 }

@@ -1,0 +1,13 @@
+﻿@using System.Reflection
+@model TestSite.Models.EntityIndexViewModel
+@{
+    Layout = "/Views/Shared/_QuickCmsLayout.cshtml";
+}
+
+<h1>@Model.EntityName</h1>
+<ul>
+    @foreach (var entity in Model.Entities)
+    {
+        <li>@entity.GetType().GetProperty("Name").GetValue(entity)</li>
+    }
+</ul>

@@ -49,7 +49,10 @@ namespace TestSite
             // You need to add Microsoft.AspNet.Mvc.WebApiCompatShim package to project.json
             // services.AddWebApiConventions();
 
-            services.AddInstance<ITypeDefinitionProvider>(new EfTypeDefinitionProvider(typeof (ApplicationDbContext)));
+            // QuickCms
+            var dbContextScanner = new EfDbContextScanner();
+            services.AddInstance<ITypeDefinitionProvider>(new EfTypeDefinitionProvider(typeof (ApplicationDbContext), dbContextScanner));
+            services.AddInstance<IRepositoryFactory>(new EfRepositoryFactory(typeof(ApplicationDbContext), dbContextScanner));
         }
 
         // Configure is called after ConfigureServices is called.

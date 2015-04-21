@@ -33,7 +33,7 @@ namespace TestSite.Models
         
         protected override void OnConfiguring(DbContextOptions options)
         {
-            options.UseSqlServer();
+            options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=aspnet5-TestSite-0f50e657-34b6-43cc-8e5e-08365e402f1c;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

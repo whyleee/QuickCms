@@ -9,11 +9,14 @@ namespace QuickCms.EntityFramework
     public class EfTypeDefinitionProvider : ITypeDefinitionProvider
     {
         private readonly Type _dbContextType;
+        private readonly EfDbContextScanner _dbContextScanner;
+
         private IList<Type> _typeDefinitions;
 
-        public EfTypeDefinitionProvider(Type dbContextType)
+        public EfTypeDefinitionProvider(Type dbContextType, EfDbContextScanner dbContextScanner)
         {
             _dbContextType = dbContextType;
+            _dbContextScanner = dbContextScanner;
         }
 
         public IEnumerable<Type> GetTypeDefinitions()
@@ -23,8 +26,7 @@ namespace QuickCms.EntityFramework
                 return _typeDefinitions;
             }
 
-            _typeDefinitions = _dbContextType.GetProperties()
-                .Where(p => p.PropertyType.IsConstructedGenericType &&  p.PropertyType.GetGenericTypeDefinition() == typeof (DbSet<>))
+            _typeDefinitions = _dbContextScanner.GetDbSetProperties(_dbContextType)
                 .Select(p => p.PropertyType.GetGenericArguments().First())
                 .ToList();
 

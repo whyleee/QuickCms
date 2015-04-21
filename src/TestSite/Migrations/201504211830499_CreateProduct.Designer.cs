@@ -7,9 +7,25 @@ using TestSite.Models;
 namespace TestSite.Migrations
 {
     [ContextType(typeof(TestSite.Models.ApplicationDbContext))]
-    public class ApplicationDbContextModelSnapshot : ModelSnapshot
+    public partial class CreateProduct : IMigrationMetadata
     {
-        public override IModel Model
+        string IMigrationMetadata.MigrationId
+        {
+            get
+            {
+                return "201504211830499_CreateProduct";
+            }
+        }
+        
+        string IMigrationMetadata.ProductVersion
+        {
+            get
+            {
+                return "7.0.0-beta3-12166";
+            }
+        }
+        
+        IModel IMigrationMetadata.TargetModel
         {
             get
             {
