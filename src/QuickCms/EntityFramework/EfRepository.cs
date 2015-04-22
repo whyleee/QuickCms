@@ -1,43 +1,41 @@
 ﻿using System;
-using System.Collections;
-using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Data.Entity;
 
 namespace QuickCms.EntityFramework
 {
     public class EfRepository : IRepository
     {
-        private readonly DbContext _db;
+        private readonly DbContext _dbContext;
         private readonly string _dbSetName;
         private readonly EfDbContextScanner _dbContextScanner;
 
-        public EfRepository(DbContext db, string dbSetName, EfDbContextScanner dbContextScanner)
+        public EfRepository(DbContext dbContext, string dbSetName, EfDbContextScanner dbContextScanner)
         {
-            _db = db;
+            _dbContext = dbContext;
             _dbSetName = dbSetName;
             _dbContextScanner = dbContextScanner;
         }
 
-        public IEnumerable GetAll()
+        public IEnumerable<object> GetAll()
         {
-            var dbSetProperty = _dbContextScanner.GetDbSetProperty(_db.GetType(), _dbSetName);
-
-            if (dbSetProperty == null)
-            {
-                throw new ArgumentException();
-            }
-
-            return (IEnumerable) dbSetProperty.GetValue(_db);
+            return GetDbSet();
         }
 
         public object Get(object id)
         {
-            throw new NotImplementedException();
+            return GetDbSet().FirstOrDefault(x => x.Id.ToString() == id.ToString());
         }
 
         public void Dispose()
         {
-            _db.Dispose();
+            _dbContext.Dispose();
+        }
+
+        private IEnumerable<dynamic> GetDbSet()
+        {
+            return _dbContextScanner.GetDbSet(_dbContext, _dbSetName);
         }
     }
 }

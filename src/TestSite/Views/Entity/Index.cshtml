@@ -1,5 +1,4 @@
-﻿@using System.Reflection
-@model TestSite.Models.EntityIndexViewModel
+﻿@model TestSite.Models.EntityIndexViewModel
 @{
     Layout = "/Views/Shared/_QuickCmsLayout.cshtml";
 }
@@ -8,6 +7,6 @@
 <ul>
     @foreach (var entity in Model.Entities)
     {
-        <li>@entity.GetType().GetProperty("Name").GetValue(entity)</li>
+        <li>@Html.ActionLink(entity.Name, "Edit", new {Model.EntityName, entity.Id})</li>
     }
 </ul>

@@ -9,10 +9,12 @@ namespace TestSite.Controllers.QuickCms
     public class EntityController : Controller
     {
         private readonly IRepositoryFactory _repoFac;
+        private readonly IModelBuilder _modelBuilder;
 
-        public EntityController(IRepositoryFactory repoFac)
+        public EntityController(IRepositoryFactory repoFac, IModelBuilder modelBuilder)
         {
             _repoFac = repoFac;
+            _modelBuilder = modelBuilder;
         }
 
         public IActionResult Index(string entityName)
@@ -22,11 +24,35 @@ namespace TestSite.Controllers.QuickCms
                 var model = new EntityIndexViewModel
                 {
                     EntityName = entityName,
-                    Entities = repo.GetAll().Cast<object>().ToList()
+                    Entities = repo.GetAll().Cast<object>()
+                        .Select(item => _modelBuilder.GetModel(item))
+                        .ToList()
                 };
 
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public IActionResult Edit(string entityName, object id)
+        {
+            using (var repo = _repoFac.CreateRepository(entityName))
+            {
+                var model = _modelBuilder.GetModel(repo.Get(id));
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ItemModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // todo: save
+            }
+
+            return View(model);
         }
     }
 }

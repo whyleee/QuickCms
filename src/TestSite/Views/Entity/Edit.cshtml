@@ -1,0 +1,11 @@
+﻿@model QuickCms.ItemModel
+@{
+    Layout = "/Views/Shared/_QuickCmsLayout.cshtml";
+}
+
+<h1>Edit @Model.TypeName</h1>
+@using (Html.BeginForm("Edit"))
+{
+    @Html.EditorFor(m => m.Item)
+    <input type="submit" value="Save" />
+}

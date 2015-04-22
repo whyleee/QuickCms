@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace QuickCms
 {
     public interface IRepository : IDisposable
     {
-        IEnumerable GetAll();
+        IEnumerable<object> GetAll();
         object Get(object id);
     }
 }

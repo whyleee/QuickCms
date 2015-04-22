@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -14,9 +15,16 @@ namespace QuickCms.EntityFramework
                 .Where(p => p.PropertyType.IsConstructedGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>));
         }
 
-        public PropertyInfo GetDbSetProperty(Type dbContextType, string propertyName)
+        public IEnumerable<dynamic> GetDbSet(DbContext dbContext, string propertyName)
         {
-            return GetDbSetProperties(dbContextType).FirstOrDefault(p => p.Name == propertyName);
+            var dbSetProperty = GetDbSetProperties(dbContext.GetType()).FirstOrDefault(p => p.Name == propertyName);
+
+            if (dbSetProperty == null)
+            {
+                throw new ArgumentException();
+            }
+
+            return ((IEnumerable) dbSetProperty.GetValue(dbContext)).Cast<object>();
         }
     }
 }

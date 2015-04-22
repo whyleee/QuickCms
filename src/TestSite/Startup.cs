@@ -53,6 +53,7 @@ namespace TestSite
             var dbContextScanner = new EfDbContextScanner();
             services.AddInstance<ITypeDefinitionProvider>(new EfTypeDefinitionProvider(typeof (ApplicationDbContext), dbContextScanner));
             services.AddInstance<IRepositoryFactory>(new EfRepositoryFactory(typeof(ApplicationDbContext), dbContextScanner));
+            services.AddTransient<IModelBuilder, DefaultModelBuilder>();
         }
 
         // Configure is called after ConfigureServices is called.

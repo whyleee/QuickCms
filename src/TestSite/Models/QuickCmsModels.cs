@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using QuickCms;
 
 namespace TestSite.Models
 {
@@ -11,6 +12,6 @@ namespace TestSite.Models
     public class EntityIndexViewModel
     {
         public string EntityName { get; set; }
-        public IList<object> Entities { get; set; }
+        public IList<ItemModel> Entities { get; set; }
     }
 }

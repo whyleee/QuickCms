@@ -1,14 +1,8 @@
 ﻿@model TestSite.Models.AdminIndexViewModel
 @{
-    Layout = null;
+    Layout = "/Views/Shared/_QuickCmsLayout.cshtml";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>QuickCms Admin</title>
-</head>
-<body>
 <h1>Found types:</h1>
 <ul>
     @foreach (var type in Model.FoundTypes)
@@ -16,5 +10,3 @@
         <li>@Html.ActionLink(type.Name, "Index", "Entity", new { entityName = type.Name + "s" }, null)</li>
     }
 </ul>
-</body>
-</html>
