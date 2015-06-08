@@ -1,15 +1,23 @@
 ﻿{
-    "version": "0.0.1",
-    "dependencies": {
-    },
+  "version": "0.0.1",
+  "description": "",
+  "authors": [ "" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
 
-    "frameworks": {
-        "aspnetcore50": {
-            "dependencies": {
-                "EntityFramework.SqlServer": "7.0.0-beta3",
-                "System.Runtime": "4.0.20-beta-22523",
-                "System.Linq": "4.0.0-beta-22605"
-            }
-        }
+  "dependencies": {
+    "EntityFramework": "7.0.0-beta4"
+  },
+
+  "frameworks": {
+    "dnxcore50": {
+      "dependencies": {
+        "System.Collections": "4.0.10-beta-22816",
+        "System.Linq": "4.0.0-beta-22816",
+        "System.Threading": "4.0.10-beta-22816",
+        "Microsoft.CSharp": "4.0.0-beta-22816"
+      }
     }
+  }
 }

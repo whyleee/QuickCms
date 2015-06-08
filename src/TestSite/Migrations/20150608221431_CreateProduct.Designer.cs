@@ -8,9 +8,19 @@ using TestSite.Models;
 namespace TestSite.Migrations
 {
     [ContextType(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class CreateProduct
     {
-        public override IModel Model
+        public override string Id
+        {
+            get { return "20150608221431_CreateProduct"; }
+        }
+        
+        public override string ProductVersion
+        {
+            get { return "7.0.0-beta4-12943"; }
+        }
+        
+        public override IModel Target
         {
             get
             {

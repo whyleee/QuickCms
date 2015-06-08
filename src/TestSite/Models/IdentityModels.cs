@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
@@ -10,30 +13,27 @@ namespace TestSite.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        private static bool _created = false;
+        private static bool _created;
 
         public DbSet<Product> Products { get; set; }
-        
+
         public ApplicationDbContext()
-        {            
+        {
             // Create the database and schema if it doesn't exist
-            // This is a temporary workaround to create database until Entity Framework database migrations 
-            // are supported in ASP.NET 5
             if (!_created)
             {
-                Database.AsMigrationsEnabled().ApplyMigrations();
+                Database.AsRelational().ApplyMigrations();
                 _created = true;
             }
         }
-        
-        protected override void OnConfiguring(DbContextOptions options)
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=aspnet5-TestSite-0f50e657-34b6-43cc-8e5e-08365e402f1c;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=aspnet5-TestSite-740e5770-506a-4ae3-8f25-a03d0b88ab7c;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
