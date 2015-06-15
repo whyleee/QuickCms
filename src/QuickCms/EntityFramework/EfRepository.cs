@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Microsoft.Data.Entity;
 
 namespace QuickCms.EntityFramework
@@ -34,6 +35,17 @@ namespace QuickCms.EntityFramework
             _dbContext.SaveChanges();
         }
 
+        public void Delete(object id)
+        {
+            var entityType = GetEntityType();
+            var entity = Activator.CreateInstance(entityType);
+            var idProperty = entityType.GetProperty("Id");
+            idProperty.SetValue(entity, Convert.ChangeType(id, idProperty.PropertyType));
+
+            _dbContext.Entry(entity).State = EntityState.Deleted;
+            _dbContext.SaveChanges();
+        }
+
         public void Dispose()
         {
             _dbContext.Dispose();
@@ -42,6 +54,11 @@ namespace QuickCms.EntityFramework
         private IEnumerable<dynamic> GetDbSet()
         {
             return _dbContextScanner.GetDbSet(_dbContext, _dbSetName);
+        }
+
+        private Type GetEntityType()
+        {
+            return GetDbSet().GetType().GetGenericArguments().First();
         }
     }
 }

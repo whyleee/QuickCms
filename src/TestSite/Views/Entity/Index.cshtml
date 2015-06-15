@@ -7,6 +7,9 @@
 <ul>
     @foreach (var entity in Model.Entities)
     {
-        <li>@Html.ActionLink(entity.Name, "Edit", new {Model.EntityName, entity.Id})</li>
+        <li>
+            @Html.ActionLink(entity.Name, "Edit", new { Model.EntityName, entity.Id })
+            [@Html.ActionLink("x", "Delete", new { Model.EntityName, entity.Id })]
+        </li>
     }
 </ul>

@@ -60,5 +60,15 @@ namespace TestSite.Controllers.QuickCms
 
             return View(model);
         }
+
+        public IActionResult Delete(string entityName, object id)
+        {
+            using (var repo = _repoFac.CreateRepository(entityName))
+            {
+                repo.Delete(id);
+            }
+
+            return RedirectToAction("Index", new { entityName });
+        }
     }
 }
