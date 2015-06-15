@@ -6,7 +6,7 @@ using Microsoft.Data.Entity;
 
 namespace QuickCms.EntityFramework
 {
-    public class EfRepository : IRepository
+    public class EfRepository : IRepository, IRepositoryMetadata
     {
         private readonly DbContext _dbContext;
         private readonly string _dbSetName;
@@ -31,7 +31,19 @@ namespace QuickCms.EntityFramework
 
         public void Save(object entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            var entityEntry = _dbContext.Entry(entity);
+            var idProperty = entity.GetType().GetProperty("Id");
+            var entityId = idProperty.GetValue(entity);
+
+            if (Equals(entityId, GetDefaultValue(idProperty.PropertyType)))
+            {
+                entityEntry.State = EntityState.Added;
+            }
+            else
+            {
+                entityEntry.State = EntityState.Modified;
+            }
+            
             _dbContext.SaveChanges();
         }
 
@@ -51,14 +63,24 @@ namespace QuickCms.EntityFramework
             _dbContext.Dispose();
         }
 
+        public Type GetEntityType()
+        {
+            return GetDbSet().GetType().GetGenericArguments().First();
+        }
+
         private IEnumerable<dynamic> GetDbSet()
         {
             return _dbContextScanner.GetDbSet(_dbContext, _dbSetName);
         }
 
-        private Type GetEntityType()
+        private object GetDefaultValue(Type type)
         {
-            return GetDbSet().GetType().GetGenericArguments().First();
+            if (type.GetTypeInfo().IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+
+            return null;
         }
     }
 }

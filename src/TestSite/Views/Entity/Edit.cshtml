@@ -4,7 +4,7 @@
 }
 
 <h1>Edit @Model.TypeName</h1>
-@using (Html.BeginForm("Edit"))
+@using (Html.BeginForm("Edit", "Entity"))
 {
     @Html.EditorFor(m => m.Item)
     @Html.HiddenFor(m => m.TypeName)

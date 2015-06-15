@@ -35,6 +35,18 @@ namespace TestSite.Controllers.QuickCms
         }
 
         [HttpGet]
+        public IActionResult Create(string entityName)
+        {
+            using (var repo = _repoFac.CreateRepository(entityName))
+            {
+                var entityType = ((IRepositoryMetadata) repo).GetEntityType();
+                var model = _modelBuilder.GetModel(Activator.CreateInstance(entityType));
+
+                return View("Edit", model);
+            }
+        }
+
+        [HttpGet]
         public IActionResult Edit(string entityName, object id)
         {
             using (var repo = _repoFac.CreateRepository(entityName))

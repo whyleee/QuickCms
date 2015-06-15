@@ -4,6 +4,7 @@
 }
 
 <h1>@(Model.EntityName)s</h1>
+@Html.ActionLink("New", "Create", new { Model.EntityName })
 <ul>
     @foreach (var entity in Model.Entities)
     {
