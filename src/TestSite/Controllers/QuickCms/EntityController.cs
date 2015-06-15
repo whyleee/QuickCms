@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Microsoft.AspNet.Mvc;
 using QuickCms;
 using TestSite.Models;
@@ -49,7 +50,12 @@ namespace TestSite.Controllers.QuickCms
         {
             if (ModelState.IsValid)
             {
-                // todo: save
+                using (var repo = _repoFac.CreateRepository(model.TypeName))
+                {
+                    repo.Save(model.Item);
+                }
+
+                return RedirectToAction("Index", new { entityName = model.TypeName });
             }
 
             return View(model);

@@ -7,6 +7,6 @@
 <ul>
     @foreach (var type in Model.FoundTypes)
     {
-        <li>@Html.ActionLink(type.Name, "Index", "Entity", new { entityName = type.Name + "s" }, null)</li>
+        <li>@Html.ActionLink(type.Name, "Index", "Entity", new { entityName = type.Name }, null)</li>
     }
 </ul>

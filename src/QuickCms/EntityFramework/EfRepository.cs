@@ -28,6 +28,12 @@ namespace QuickCms.EntityFramework
             return GetDbSet().FirstOrDefault(x => x.Id.ToString() == id.ToString());
         }
 
+        public void Save(object entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+        }
+
         public void Dispose()
         {
             _dbContext.Dispose();

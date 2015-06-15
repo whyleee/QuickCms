@@ -17,7 +17,7 @@ namespace QuickCms.EntityFramework
         public IRepository CreateRepository(string name)
         {
             var db = (DbContext) Activator.CreateInstance(_dbContextType);
-            return new EfRepository(db, name, _efDbContextScanner);
+            return new EfRepository(db, name + "s", _efDbContextScanner);
         }
     }
 }

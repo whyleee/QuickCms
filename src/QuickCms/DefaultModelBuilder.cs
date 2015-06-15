@@ -19,6 +19,7 @@ namespace QuickCms
                 Id = id,
                 Name = name,
                 TypeName = typeName,
+                FullTypeName = item.GetType().FullName,
                 Fields = GetFieldModels(item).ToList()
             };
         }

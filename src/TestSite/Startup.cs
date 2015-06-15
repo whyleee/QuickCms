@@ -13,6 +13,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Routing;
 using Microsoft.Data.Entity;
 using Microsoft.Framework.ConfigurationModel;
@@ -22,6 +23,7 @@ using Microsoft.Framework.Logging.Console;
 using Microsoft.Framework.Runtime;
 using QuickCms;
 using QuickCms.EntityFramework;
+using TestSite.Binding;
 using TestSite.Models;
 
 namespace TestSite
@@ -80,7 +82,9 @@ namespace TestSite
             });
 
             // Add MVC services to the services container.
-            services.AddMvc();
+            services.AddMvc().Configure<MvcOptions>(options =>
+                options.ModelBinders.Add(typeof(ItemModelBinder))
+            );
 
             // Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.

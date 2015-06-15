@@ -13,6 +13,8 @@ namespace QuickCms
 
         public string TypeName { get; set; }
 
+        public string FullTypeName { get; set; }
+
         public IEnumerable<ItemFieldModel> Fields { get; set; }
     }
 }

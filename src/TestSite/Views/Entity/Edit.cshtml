@@ -7,5 +7,7 @@
 @using (Html.BeginForm("Edit"))
 {
     @Html.EditorFor(m => m.Item)
+    @Html.HiddenFor(m => m.TypeName)
+    @Html.HiddenFor(m => m.FullTypeName)
     <input type="submit" value="Save" />
 }
