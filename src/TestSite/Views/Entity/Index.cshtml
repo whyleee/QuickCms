@@ -1,0 +1,16 @@
+﻿@model TestSite.Models.EntityIndexViewModel
+@{
+    Layout = "/Views/Shared/_QuickCmsLayout.cshtml";
+}
+
+<h1>@(Model.EntityName)s</h1>
+@Html.ActionLink("New", "Create", new { Model.EntityName })
+<ul>
+    @foreach (var entity in Model.Entities)
+    {
+        <li>
+            @Html.ActionLink(entity.Name, "Edit", new { Model.EntityName, entity.Id })
+            [@Html.ActionLink("x", "Delete", new { Model.EntityName, entity.Id })]
+        </li>
+    }
+</ul>

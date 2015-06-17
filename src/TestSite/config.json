@@ -1,12 +1,10 @@
 {
-    "Data": {
-        "DefaultConnection": { 
-            "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-TestSite-0f50e657-34b6-43cc-8e5e-08365e402f1c;Trusted_Connection=True;MultipleActiveResultSets=true"
-        }
-    },
-    "EntityFramework": {
-        "ApplicationDbContext": {
-            "ConnectionString": "Data:DefaultConnection:ConnectionString"
-        }
+  "AppSettings": {
+    "SiteTitle": "TestSite"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-TestSite-740e5770-506a-4ae3-8f25-a03d0b88ab7c;Trusted_Connection=True;MultipleActiveResultSets=true"
     }
+  }
 }
