@@ -1,10 +1,10 @@
 ﻿{
-  "version": "0.0.1",
-  "description": "",
-  "authors": [ "" ],
+  "version": "0.1.0",
+  "description": "A quick admin for simple projects",
+  "authors": [ "Pavel Nezhencev" ],
   "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "projectUrl": "https://github.com/whyleee/QuickCms",
+  "licenseUrl": "http://mit-license.org/",
 
   "dependencies": {
     "EntityFramework": "7.0.0-beta4"

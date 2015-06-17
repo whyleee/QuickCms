@@ -1,7 +1,6 @@
 ﻿{
   "webroot": "wwwroot",
   "userSecretsId": "aspnet5-TestSite-740e5770-506a-4ae3-8f25-a03d0b88ab7c",
-  "version": "0.0.1",
 
   "dependencies": {
     "EntityFramework.SqlServer": "7.0.0-beta4",
@@ -26,7 +25,7 @@
     "Microsoft.Framework.Logging": "1.0.0-beta4",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta4",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta4",
-    "QuickCms": "0.0.1"
+    "QuickCms": "0.1.0"
   },
 
   "commands": {
